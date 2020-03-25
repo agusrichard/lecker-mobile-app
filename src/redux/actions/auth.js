@@ -63,9 +63,9 @@ export const forgotPasswordUser = (username, email) => {
       const forgotData = { username, email }
       const response = await axios.post(`${BASE_URL}/auth/forgot-password`, forgotData)
       console.log(response)
-      // if (response.status === 200) {
-      //   dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS })
-      // }
+      if (response.status === 200) {
+        dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS })
+      }
     } catch(err) {
       dispatch({ type: USER_FORGOT_PASSWORD_FAILED })
     }

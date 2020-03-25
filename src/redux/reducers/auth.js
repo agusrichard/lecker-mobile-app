@@ -14,7 +14,7 @@ const initialState = {
   isLoading: false,
   isLoggedIn: false,
   loginToken: '',
-  failedMessage: ''
+  errorMessage: ''
 }
 
 export default function authReducer(state=initialState, action) {
@@ -36,7 +36,7 @@ export default function authReducer(state=initialState, action) {
       isLoading: !state.isLoading,
       isLoggedIn: false,
       loginToken: '',
-      failedMessage: 'Failed to login'
+      errorMessage: 'Failed to login'
     }
 
     case USER_REGISTER_REQUEST: return {
@@ -51,7 +51,8 @@ export default function authReducer(state=initialState, action) {
 
     case USER_REGISTER_FAILED: return {
       ...state,
-      isLoading: !state.isLoading
+      isLoading: !state.isLoading,
+      errorMessage: 'Failed to register'
     }
 
     case USER_FORGOT_PASSWORD_REQUEST: return {
@@ -66,7 +67,8 @@ export default function authReducer(state=initialState, action) {
 
     case USER_FORGOT_PASSWORD_FAILED: return {
       ...state,
-      isLoading: !state.isLoading
+      isLoading: !state.isLoading,
+      errorMessage: 'Failed to change password'
     }
 
     default: return state
