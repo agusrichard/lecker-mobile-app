@@ -6,7 +6,7 @@ import { Button } from 'galio-framework'
 import MainStyle from '../../assets/styles/MainStyle'
 import { registerUser } from '../../redux/actions/auth'
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +33,7 @@ class Login extends Component {
         <Text style={MainStyle.headerText}>Sign Up</Text>
         <View style={{alignContent: 'center'}}>
           <Item floatingLabel style={MainStyle.formGroup}>
-            <Label>Fullname</Label>
+            <Label>Full Name</Label>
             <Input 
               style={MainStyle.inputText}
               onChangeText={(name) => this.setState({name})}
@@ -68,4 +68,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { registerUser })(Login)
+export default connect(null, { registerUser })(Register)
