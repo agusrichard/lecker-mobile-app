@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 import authReducer from './auth'
 import userReducer from './user'
+import restaurantReducer from './restaurant'
 import { USER_LOGOUT_SUCCESS } from '../actions/types'
 
 
 const reducers = {
   auth: authReducer,
-  user: userReducer
+  user: userReducer,
+  restaurant: restaurantReducer
 }
 
 const appReducer = combineReducers(reducers)

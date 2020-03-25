@@ -14,7 +14,7 @@ class Home extends Component {
     console.log('Home')
     return (
       <View>
-        <Text>Username: {this.props.userProfile.username}</Text>
+        <Text style={{fontFamily: 'Cinzel-Black'}}>Username: {this.props.userProfile.username}</Text>
         <Button
           title="Sign Out"
           onPress={this.props.logoutUser}

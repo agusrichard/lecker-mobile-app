@@ -17,12 +17,8 @@ class Login extends Component {
   }
 
   handleSubmit = () => {
-    console.log('handleSubmit')
-    const loginToken = this.props.loginUser(this.state.username, this.state.password)
-    console.log('handleSubmit in Login', loginToken)
+    this.props.loginUser(this.state.username, this.state.password)
   }
-
-  componentWillUnmount() {}
 
   render() {
     return (
