@@ -1,7 +1,10 @@
 import {
   GET_RESTAURANTS_REQUEST,
   GET_RESTAURANTS_SUCCESS,
-  GET_RESTAURANTS_FAILED
+  GET_RESTAURANTS_FAILED,
+  GET_RESTAURANT_REQUEST,
+  GET_RESTAURANT_SUCCESS,
+  GET_RESTAURANT_FAILED
 } from '../actions/types'
 
 const initialState = {
@@ -38,7 +41,7 @@ export default function restaurantReducer(state=initialState, action) {
     case GET_RESTAURANT_SUCCESS: return {
       ...state,
       isLoading: !state.isLoading,
-      restaurants: action.payload
+      restaurant: action.payload
     }
 
     case GET_RESTAURANT_FAILED: return {
