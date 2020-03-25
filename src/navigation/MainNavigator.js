@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PublicNavigator from './PublicNavigator'
 import PrivateNavigator from './PrivateNavigator'
 
 class MainNavigator extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoggedIn: false
-    }
-  }
-
   render() {
-    if (this.state.isLoggedIn) {
-      return <PublicNavigator />
-    } else {
+    if (this.props.isLoggedIn) {
       return <PrivateNavigator />
+    } else {
+      return <PublicNavigator />
     }
   }
 }
 
-export default MainNavigator
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.isLoggedIn
+})
+
+export default connect(mapStateToProps)(MainNavigator)

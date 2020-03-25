@@ -1,14 +1,22 @@
 import axios from 'axios'
 import { BASE_URL } from 'react-native-dotenv'
 
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAILED } from './types'
+import { 
+  USER_LOGIN_REQUEST, 
+  USER_LOGIN_SUCCESS, 
+  USER_LOGIN_FAILED,
+  USER_LOGOUT_SUCCESS
+} from './types'
 
 export const userLogin = (username, password) => {
+  console.log('userLogin')
+  console.log(username, password)
   return async dispatch => {
     dispatch({ type: USER_LOGIN_REQUEST })
     try {
       const loginData = { username, password }
-      const response = await axios.post(BASE_URL + 'auth/login', loginData)
+      const response = await axios.post(`${BASE_URL}/auth/login`, loginData)
+      console.log(response)
       if (response.status === 200) {
         dispatch({ type: USER_LOGIN_SUCCESS, payload: response.data.data.token })
       } else {
@@ -18,4 +26,8 @@ export const userLogin = (username, password) => {
       dispatch({ type: USER_LOGIN_FAILED })
     }
   }
+}
+
+export const userLogout = {
+  type: USER_LOGOUT_SUCCESS
 }
