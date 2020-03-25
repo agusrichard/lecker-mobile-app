@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { Item, Label, Input } from 'native-base'
 import { Button } from 'galio-framework'
 import MainStyle from '../../assets/styles/MainStyle'
-import { userLogin } from '../../redux/actions/auth'
+import { loginUser } from '../../redux/actions/auth'
+import { getUserProfile } from '../../redux/actions/user'
 
 class Login extends Component {
   constructor(props) {
@@ -16,8 +17,12 @@ class Login extends Component {
   }
 
   handleSubmit = () => {
-    this.props.userLogin(this.state.username, this.state.password)
+    console.log('handleSubmit')
+    const loginToken = this.props.loginUser(this.state.username, this.state.password)
+    console.log('handleSubmit in Login', loginToken)
   }
+
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -40,10 +45,15 @@ class Login extends Component {
             />
           </Item>
           <Button onPress={this.handleSubmit} >Sign In</Button>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
+            <Text>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
 
-export default connect(null, { userLogin })(Login)
+const mapStateToProps = state => ({ loginToken: state.auth.loginToken })
+
+export default connect(mapStateToProps, { loginUser, getUserProfile })(Login)
