@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { View, Text, Button } from 'react-native'
+import { userLogout } from '../../redux/actions/auth'
 
 class Home extends Component {
+
   render() {
     return (
       <View>
         <Text>Home screen</Text>
+        <Button
+          title="Sign Out"
+          onPress={this.props.userLogout}
+        />
       </View>
     )
   }
 }
 
-export default Home
+export default connect(null, { userLogout })(Home)

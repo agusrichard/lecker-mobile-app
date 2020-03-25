@@ -28,6 +28,8 @@ export const userLogin = (username, password) => {
   }
 }
 
-export const userLogout = {
-  type: USER_LOGOUT_SUCCESS
+export const userLogout = () => {
+  return dispatch => {
+    dispatch({ type: USER_LOGOUT_SUCCESS })
+  }
 }

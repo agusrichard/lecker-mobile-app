@@ -10,7 +10,8 @@ const reducers = {
 const appReducer = combineReducers(reducers)
 
 const rootReducer = (state, action) => {
-
+  console.log('rootReducer')
+  console.log(action.type)
   if (action.type === USER_LOGOUT_SUCCESS) {
     state = {}
   }
