@@ -10,8 +10,8 @@ export default StyleSheet.create({
   },
   logo: {
     marginTop: 5,
-    width: '40%',
-    height: '25%',
+    width: '100%',
+    height: '100%',
     resizeMode: 'stretch'
   },
   container: { 
