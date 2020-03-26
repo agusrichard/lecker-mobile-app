@@ -72,5 +72,16 @@ export default StyleSheet.create({
     marginTop: 30,
     width: '100%',
     height: 100
+  },
+  successTextContainer: {
+    alignItems: 'center', 
+    height: 279, 
+    marginTop: 100
+  },
+  successText: {
+    fontSize: 32,
+    padding: 10,
+    textAlign: 'center',
+    color: '#f00c9c'
   }
 })
