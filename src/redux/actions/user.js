@@ -55,12 +55,12 @@ export const changeProfile = (loginToken, oldData, newData) => {
     try {
       let formData = new FormData()
       formData.append('profilePicture', newData.profilePicture)
-      formData.append('email', newData.email || oldData.profile.email)
-      formData.append('fullName', newData.fullName || oldData.profile.full_name)
-      formData.append('address', newData.address || oldData.profile.address)
+      formData.append('email', newData.email || oldData.email)
+      formData.append('fullName', newData.fullName || oldData.full_name)
+      formData.append('address', newData.address || oldData.address)
 
       const config = { headers: { Authorization: `Bearer ${loginToken}` } }
-      const response = await axios.patch(process.env.REACT_APP_BASE_URL + '/users/change-profile', formData, config)
+      const response = await axios.patch(`${BASE_URL}/users/change-profile`, formData, config)
       if (response.status === 200) {
         dispatch({ type: CHANGE_PROFILE_SUCCESS })
       }

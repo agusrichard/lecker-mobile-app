@@ -9,6 +9,7 @@ class Profile extends Component {
   render() {
     const image = { uri: `${BASE_URL}/${this.props.userProfile.profile_picture}` }
     const editIcon = require('../../assets/images/userPage/edit-icon.png')
+    console.log(this.props.navigation)
 
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }} >
@@ -20,7 +21,7 @@ class Profile extends Component {
             <View style={UserStyle.contentText}>
               <Text style={UserStyle.fullnameText}>{this.props.userProfile.full_name}</Text>
               <Text style={UserStyle.usernameText}>{this.props.userProfile.username}</Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('EditProfile')}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('UpdateProfile')}>
                 <Image source={editIcon} style={UserStyle.editIcon}/>
               </TouchableOpacity>
             </View>
