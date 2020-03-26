@@ -61,5 +61,16 @@ export default StyleSheet.create({
   },
   authBtnText: {
     color: '#fff'
+  },
+  registerHeaderImg: {
+    height: 125,
+    width: 500,
+    paddingTop: 0,
+    marginBottom: -20
+  },
+  registerBottomImg: {
+    marginTop: 30,
+    width: '100%',
+    height: 100
   }
 })

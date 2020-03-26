@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView } from 'react-native'
-import { Item, Label, Input } from 'native-base'
-import { Button } from 'galio-framework'
-import MainStyle from '../../assets/styles/MainStyle'
+import { 
+  View, Text, 
+  TouchableOpacity, 
+  Image, TextInput, 
+  ActivityIndicator } from 'react-native'
 import AuthStyle from '../../assets/styles/AuthStyle'
 import { loginUser } from '../../redux/actions/auth'
 import { getUserProfile } from '../../redux/actions/user'
@@ -29,7 +30,7 @@ class Login extends Component {
         <View style={AuthStyle.viewContainer}>
           <Image source={headerImg} style={AuthStyle.headerImg} />
         </View>
-        <KeyboardAvoidingView style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
           <Text style={AuthStyle.loginHeaderText}>Sign In</Text>
           <View style={AuthStyle.formContainer}>
             <TextInput 
@@ -46,10 +47,17 @@ class Login extends Component {
               onChangeText={(password) => this.setState({password})}
             />
           </View>
-          <TouchableOpacity style={AuthStyle.authBtn}>
-            <Text style={AuthStyle.authBtnText}>Sign In</Text>
+          <TouchableOpacity 
+            style={AuthStyle.authBtn}
+            onPress={this.handleSubmit}
+          >
+            { this.props.isLoading ?
+              <ActivityIndicator size="small" color="#fff" />
+              :
+              <Text style={AuthStyle.authBtnText}>Sign In</Text>
+            }
           </TouchableOpacity>
-        </KeyboardAvoidingView>
+        </View>
         <View style={AuthStyle.viewContainer}>
           <Image source={bottomImg} style={AuthStyle.bottomImg} />
         </View>
@@ -58,6 +66,6 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({ loginToken: state.auth.loginToken })
+const mapStateToProps = state => ({ isLoading: state.auth.isLoading })
 
 export default connect(mapStateToProps, { loginUser, getUserProfile })(Login)
