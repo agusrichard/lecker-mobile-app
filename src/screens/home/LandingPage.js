@@ -17,6 +17,7 @@ function LandingPage(props) {
         <Text style={AuthStyle.headerText}>Welcome to Lecker</Text>
         <NavigationButton title="Sign Up" navigation={props.navigation} to="Register"/>
         <NavigationButton title="Sign In" navigation={props.navigation} to="Login"/>
+        <NavigationButton title="Forgot Password" navigation={props.navigation} to="ForgotPassword"/>
       </View>
     </ImageBackground>
   )

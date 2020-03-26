@@ -1,41 +1,70 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
-import { Item, Label, Input } from 'native-base'
-import { Button } from 'galio-framework'
-import MainStyle from '../../assets/styles/MainStyle'
+import { 
+  ImageBackground, Text,
+  TouchableOpacity, 
+  TextInput, View,
+  ActivityIndicator
+} from 'react-native'
+import AuthStyle from '../../assets/styles/AuthStyle'
 import { forgotPasswordUser } from '../../redux/actions/auth'
+const backgroundImg = require('../../assets/images/forgotPasswordPage/background.png')
 
-function ForgotPassword(props) {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-
-  handleSubmit = () => {
-    props.forgotPasswordUser(username, email)
+class ForgotPassword extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isSuccess: false,
+      username: '',
+      email: ''
+    }
   }
 
-  return (
-    <View style={[MainStyle.container, {alignContent: 'center'}]}>
-      <Text style={MainStyle.headerText}>Forgot Password</Text>
-      <View style={{alignContent: 'center'}}>
-        <Item floatingLabel style={MainStyle.formGroup}>
-          <Label>Email</Label>
-          <Input 
-            style={MainStyle.inputText}
-            onChangeText={(email) => setEmail(email)}
-          />
-        </Item>
-        <Item floatingLabel style={MainStyle.formGroup}>
-          <Label>Username</Label>
-          <Input 
-            style={MainStyle.inputText}
-            onChangeText={(username) => setUsername(username)}
-          />
-        </Item>
-        <Button onPress={handleSubmit} >Submit</Button>
-      </View>
-    </View>
-  )
+  handleSubmit = () => {
+    this.props.forgotPasswordUser(this.state.username, this.state.email)
+    this.setState({ isSuccess: true })
+  }
+
+  render() {
+    return (
+      <ImageBackground source={backgroundImg} style={AuthStyle.backgroundImage}>
+        { this.state.isSuccess && this.props.isLoading ?
+          <View style={AuthStyle.successTextContainer}>
+            <Text style={AuthStyle.successText}>Please check your email to verify your account</Text>
+          </View>
+          :
+          <View style={{ alignItems: 'center' }}>
+          <Text style={[AuthStyle.loginHeaderText, { marginTop: 60 }]}>Forgot Password</Text>
+          <View style={AuthStyle.formContainer}>
+            <TextInput 
+              placeholder="Username" 
+              style={AuthStyle.textInput} 
+              onChangeText={(username) => this.setState({username})}  
+            />
+          </View>
+          <View style={AuthStyle.formContainer}>
+            <TextInput
+              placeholder="Email" 
+              style={AuthStyle.textInput} 
+              onChangeText={(email) => this.setState({email})}
+            />
+          </View>
+          <TouchableOpacity 
+            style={AuthStyle.authBtn}
+            onPress={this.handleSubmit}
+          >
+            { this.props.isLoading ?
+              <ActivityIndicator size="small" color="#fff" />
+              :
+              <Text style={AuthStyle.authBtnText}>Sign In</Text>
+            }
+          </TouchableOpacity>
+        </View>}
+      </ImageBackground>
+    )
+  }
 }
 
-export default connect(null, { forgotPasswordUser })(ForgotPassword)
+const mapStateToProps = state => ({ isLoading: state.auth.isLoading })
+
+export default connect(mapStateToProps, { forgotPasswordUser })(ForgotPassword)

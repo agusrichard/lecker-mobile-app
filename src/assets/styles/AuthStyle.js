@@ -83,5 +83,12 @@ export default StyleSheet.create({
     padding: 10,
     textAlign: 'center',
     color: '#f00c9c'
-  }
+  },
+  backgroundImage: {
+    marginTop: 70,
+    width: 350,
+    height: 450,
+    alignSelf: 'center',
+    alignItems: 'center'
+  },
 })
