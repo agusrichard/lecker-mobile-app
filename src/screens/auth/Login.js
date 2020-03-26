@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView } from 'react-native'
 import { Item, Label, Input } from 'native-base'
 import { Button } from 'galio-framework'
 import MainStyle from '../../assets/styles/MainStyle'
@@ -29,7 +29,7 @@ class Login extends Component {
         <View style={AuthStyle.viewContainer}>
           <Image source={headerImg} style={AuthStyle.headerImg} />
         </View>
-        <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+        <KeyboardAvoidingView style={{ alignItems: 'center' }}>
           <Text style={AuthStyle.loginHeaderText}>Sign In</Text>
           <View style={AuthStyle.formContainer}>
             <TextInput 
@@ -49,7 +49,7 @@ class Login extends Component {
           <TouchableOpacity style={AuthStyle.authBtn}>
             <Text style={AuthStyle.authBtnText}>Sign In</Text>
           </TouchableOpacity>
-        </ScrollView>
+        </KeyboardAvoidingView>
         <View style={AuthStyle.viewContainer}>
           <Image source={bottomImg} style={AuthStyle.bottomImg} />
         </View>
