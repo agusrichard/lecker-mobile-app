@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import UserStyle from '../../assets/styles/UserStyle'
 import { changeProfile } from '../../redux/actions/user'
@@ -21,6 +21,7 @@ class UpdateProfile extends React.Component {
       address: this.state.address
     }
     this.props.changeProfile(this.props.loginToken, this.props.userProfile,  newData)
+    this.props.navigation.navigate('Profile')
   }
 
   render() {
@@ -51,7 +52,11 @@ class UpdateProfile extends React.Component {
           />
         </View>
         <TouchableOpacity onPress={() => this.handleSubmit()} style={UserStyle.updateBtn}>
-          <Text style={UserStyle.updateBtnText}>Submit</Text>
+          { this.props.isLoading ?
+            <ActivityIndicator size="small" color="#fff" />
+            :
+            <Text style={UserStyle.updateBtnText}>Submit</Text>
+          }
         </TouchableOpacity>
       </View>
     )
@@ -60,7 +65,8 @@ class UpdateProfile extends React.Component {
 
 const mapStateToProps = state => ({ 
   userProfile: state.user.userProfile,
-  loginToken: state.auth.loginToken
+  loginToken: state.auth.loginToken,
+  isLoading: state.user.isLoading
 })
 
 export default connect(mapStateToProps, { changeProfile })(UpdateProfile)

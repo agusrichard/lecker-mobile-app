@@ -19,7 +19,7 @@ export const getUserProfile = (loginToken) => {
     dispatch({ type: GET_USER_PROFILE_REQUEST })
     try {
       const config = { headers: { Authorization: `Bearer ${loginToken}` } }
-      const response = await axios.get(`${BASE_URL}/users/profile`, config)
+      const response = await axios.get(`http://3.88.30.184:5000/users/profile`, config)
       if (response.status === 200) {
         console.log(response.data.data.user)
         dispatch({
@@ -39,11 +39,12 @@ export const topUp = (loginToken, amount) => {
     try {
       const config = { headers: { Authorization: `Bearer ${loginToken}` } }
       const data = { amount }
-      const response = await axios.post(`${BASE_URL}/users/topup`, data, config)
+      const response = await axios.patch(`http://3.88.30.184:5000/users/topup`, data, config)
       if (response.status === 200) {
         dispatch({ type: TOPUP_SUCCESS })
       }
     } catch(err) {
+      console.log(err)
       dispatch({ type: TOPUP_FAILED })
     }
   }
@@ -60,7 +61,7 @@ export const changeProfile = (loginToken, oldData, newData) => {
       formData.append('address', newData.address || oldData.address)
 
       const config = { headers: { Authorization: `Bearer ${loginToken}` } }
-      const response = await axios.patch(`${BASE_URL}/users/change-profile`, formData, config)
+      const response = await axios.patch(`http://3.88.30.184:5000/users/change-profile`, formData, config)
       if (response.status === 200) {
         dispatch({ type: CHANGE_PROFILE_SUCCESS })
       }

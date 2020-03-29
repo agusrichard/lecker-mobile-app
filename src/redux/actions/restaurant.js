@@ -13,7 +13,7 @@ export const getRestaurants = () => {
   return async dispatch => {
     dispatch({ type: GET_RESTAURANTS_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants`)
+      const response = await axios.get(`http://3.88.30.184:5000/restaurants`)
       console.log(response)
       if (response.status === 200) {
         dispatch({
@@ -31,7 +31,7 @@ export const getRestaurant = (restaurantId) => {
   return async dispatch => {
     dispatch({ type: GET_RESTAURANT_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants/${restaurantId}`)
+      const response = await axios.get(`http://3.88.30.184:5000/restaurants/${restaurantId}`)
       console.log(response)
       if (response.status === 200) {
         dispatch({

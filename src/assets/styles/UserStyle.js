@@ -41,7 +41,14 @@ export default StyleSheet.create({
   },
   editIcon: {
     width: 25,
-    height: 25
+    height: 25,
+    marginTop: 10
+  },
+  topupIcon: {
+    width: 25,
+    height: 25,
+    marginTop: 10,
+    marginLeft: 10
   },
   inputLabel: {
     fontSize: 16,
@@ -63,6 +70,32 @@ export default StyleSheet.create({
     marginTop: 10
   },
   updateBtnText: {
+    color: '#fff'
+  },
+  balanceText: {
+    color: '#d4cf50',
+    fontSize: 18
+  },
+  modalHeader: {
+    fontSize: 24,
+    marginTop: 18,
+    color: '#d4cf50',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(240, 129, 214, 0.5)',
+    paddingBottom: 10
+  },
+  balanceInput: { 
+    width: 150, 
+    backgroundColor: 'rgba(240, 129, 214, 0.5)', 
+    borderRadius: 5 
+  },
+  cancelBtn: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#777',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    marginLeft: 10,
     color: '#fff'
   }
 })

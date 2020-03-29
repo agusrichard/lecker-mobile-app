@@ -19,7 +19,7 @@ export const getItems = () => {
   return async dispatch => {
     dispatch({ type: GET_ITEMS_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/items`)
+      const response = await axios.get(`http://3.88.30.184:5000/items`)
       console.log(response)
       if (response.status === 200) {
         dispatch({
@@ -37,7 +37,7 @@ export const getItem = (itemId) => {
   return async dispatch => {
     dispatch({ type: GET_ITEM_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/items/${itemId}`)
+      const response = await axios.get(`http://3.88.30.184:5000/items/${itemId}`)
       console.log(response)
       if (response.status === 200) {
         dispatch({
@@ -55,7 +55,7 @@ export const getItemsByRestaurant = (restaurantId) => {
   return async dispatch => {
     dispatch({ type: GET_ITEMS_BY_RESTAURANT_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/restaurants/${restaurantId}/items`)
+      const response = await axios.get(`http://3.88.30.184:5000/restaurants/${restaurantId}/items`)
       if (response.status === 200) {
         dispatch({
           type: GET_ITEMS_BY_RESTAURANT_SUCCESS,
@@ -72,7 +72,7 @@ export const getItemReviews = (itemId) => {
   return async dispatch => {
     dispatch({ type: GET_ITEM_REVIEWS_REQUEST })
     try {
-      const response = await axios.get(`${BASE_URL}/reviews/items/${itemId}`)
+      const response = await axios.get(`http://3.88.30.184:5000/reviews/items/${itemId}`)
       if (response.status === 200) {
         dispatch({
           type: GET_ITEM_REVIEWS_SUCCESS,
