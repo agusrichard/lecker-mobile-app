@@ -13,7 +13,16 @@ class Menu extends Component {
     this.props.items.results.forEach(item => console.log(item))
     return (
       <View>
-        <Text>Menu screen</Text>
+        <Text style={RestaurantStyle.headerText}>Menus</Text>
+        { this.props.items.length === 0 ? 
+          <Text style={{ marginTop: 20 }}>No Menus</Text>
+          :
+          <FlatList
+            data={this.props.items}
+            renderItem={({ item }) => <RestaurantCard restaurant={item} />}
+            keyExtractor={(restaurant) => restaurant.id}
+          />
+        } 
       </View>
     )
   }
