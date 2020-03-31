@@ -11,6 +11,7 @@ const BottomTabNavigator = createBottomTabNavigator({
   Menu: Menu,
   Restaurant: Restaurant,
   Profile: Profile
+  
 }, {
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused }) => {
@@ -26,7 +27,7 @@ const BottomTabNavigator = createBottomTabNavigator({
         iconName = 'user-tie'
       }
       return <Icon name={iconName} size={26} color={focused ? 'purple' : '#999'} />
-    }
+    }, 
   })
 })
 

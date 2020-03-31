@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TextInput } from 'react-native'
-import { Item, Label, Input } from 'native-base'
-import { Button } from 'galio-framework'
-import MainStyle from '../../assets/styles/MainStyle'
+import { 
+  ScrollView, Text, 
+  TouchableOpacity, 
+  Image, TextInput, View,
+  ActivityIndicator } from 'react-native'
+import AuthStyle from '../../assets/styles/AuthStyle'
 import { registerUser } from '../../redux/actions/auth'
+const headerImg = require('../../assets/images/registerPage/header-img.png')
+const bottomImg = require('../../assets/images/registerPage/bottom-img.png')
 
 class Register extends Component {
   constructor(props) {
@@ -25,47 +29,72 @@ class Register extends Component {
       this.state.username, 
       this.state.password
     )
+    this.setState({ registerSuccess: true })
   }
 
   render() {
     return (
-      <View style={[MainStyle.container, {alignContent: 'center'}]}>
-        <Text style={MainStyle.headerText}>Sign Up</Text>
-        <View style={{alignContent: 'center'}}>
-          <Item floatingLabel style={MainStyle.formGroup}>
-            <Label>Full Name</Label>
-            <Input 
-              style={MainStyle.inputText}
-              onChangeText={(name) => this.setState({name})}
-            />
-          </Item>
-          <Item floatingLabel style={MainStyle.formGroup}>
-            <Label>Email</Label>
-            <Input 
-              style={MainStyle.inputText}
-              onChangeText={(email) => this.setState({email})}
-            />
-          </Item>
-          <Item floatingLabel style={MainStyle.formGroup}>
-            <Label>Username</Label>
-            <Input 
-              style={MainStyle.inputText}
-              onChangeText={(username) => this.setState({username})}
-            />
-          </Item>
-          <Item floatingLabel style={MainStyle.formGroup}>
-            <Label>Password</Label>
-            <Input 
-              style={MainStyle.inputText}
-              secureTextEntry={true}
-              onChangeText={(password) => this.setState({password})}
-            />
-          </Item>
-          <Button onPress={this.handleSubmit} >Sign In</Button>
+      <ScrollView contentContainerstyle={{ flex: 1, alignItems: 'center' }}>
+        <View style={AuthStyle.viewContainer}>
+          <Image source={headerImg} style={AuthStyle.registerHeaderImg} />
         </View>
-      </View>
+        { 
+          this.state.registerSuccess && !this.props.isLoading ? 
+          <View style={AuthStyle.successTextContainer}>
+            <Text style={AuthStyle.successText}>Please check your email to verify your account</Text>
+          </View>
+          :
+          <View style={{ alignItems: 'center' }}>
+            <Text style={AuthStyle.loginHeaderText}>Sign Up</Text>
+            <View style={AuthStyle.formContainer}>
+              <TextInput 
+                placeholder="Full Name" 
+                style={AuthStyle.textInput} 
+                onChangeText={(name) => this.setState({name})}  
+              />
+            </View>
+            <View style={AuthStyle.formContainer}>
+              <TextInput 
+                placeholder="Email" 
+                style={AuthStyle.textInput} 
+                onChangeText={(email) => this.setState({email})}  
+              />
+            </View>
+            <View style={AuthStyle.formContainer}>
+              <TextInput 
+                placeholder="Username" 
+                style={AuthStyle.textInput} 
+                onChangeText={(username) => this.setState({username})}  
+              />
+            </View>
+            <View style={AuthStyle.formContainer}>
+              <TextInput
+                secureTextEntry={true}
+                placeholder="Password" 
+                style={AuthStyle.textInput} 
+                onChangeText={(password) => this.setState({password})}
+              />
+            </View>
+            <TouchableOpacity 
+              style={AuthStyle.authBtn}
+              onPress={this.handleSubmit}
+            >
+              { this.props.isLoading ?
+                <ActivityIndicator size="small" color="#fff" />
+                :
+                <Text style={AuthStyle.authBtnText}>Sign Up</Text>
+              }
+            </TouchableOpacity>
+          </View>
+        }
+        <View style={AuthStyle.viewContainer}>
+          <Image source={bottomImg} style={AuthStyle.registerBottomImg} />
+        </View>
+      </ScrollView>
     )
   }
 }
 
-export default connect(null, { registerUser })(Register)
+const mapStateToProps = state => ({ isLoading: state.auth.isLoading })
+
+export default connect(mapStateToProps, { registerUser })(Register)

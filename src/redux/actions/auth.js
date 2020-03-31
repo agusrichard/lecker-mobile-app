@@ -19,7 +19,7 @@ export const loginUser = (username, password) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     try {
       const loginData = { username, password }
-      const response = await axios.post(`${BASE_URL}/auth/login`, loginData)
+      const response = await axios.post(`http://3.88.30.184:5000/auth/login`, loginData)
       if (response.status === 200) {
         const loginToken = response.data.data.token
         dispatch({ type: USER_LOGIN_SUCCESS, payload: loginToken })
@@ -45,7 +45,7 @@ export const registerUser = (name, email, username, password) => {
     dispatch({ type: USER_REGISTER_REQUEST })
     try {
       const registerData = { name, email, username, password }
-      const response = await axios.post(`${BASE_URL}/auth/register`, registerData)
+      const response = await axios.post(`http://3.88.30.184:5000/auth/register`, registerData)
       console.log(response)
       if (response.status === 200) {
         dispatch({ type: USER_REGISTER_SUCCESS })
@@ -61,7 +61,7 @@ export const forgotPasswordUser = (username, email) => {
     dispatch({ type: USER_FORGOT_PASSWORD_REQUEST })
     try {
       const forgotData = { username, email }
-      const response = await axios.post(`${BASE_URL}/auth/forgot-password`, forgotData)
+      const response = await axios.post(`http://3.88.30.184:5000/auth/forgot-password`, forgotData)
       console.log(response)
       if (response.status === 200) {
         dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS })
